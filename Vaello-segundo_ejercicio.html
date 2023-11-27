@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Reloj JS</title>
+
+    <style type="text/css">
+        body {
+            text-align: center;
+            font-size: 150px;
+            background-color: black;
+            color: white;
+        }
+
+        #hora,
+        #minutos,
+        #segundos {
+            border-radius: 50%;
+            height: 200px;
+            width: 200px;
+            font-size: 100px;
+            text-align: center;
+            color: black;
+            background-color: white
+        }
+
+        #dia,
+        #mes,
+        #ano {
+            height: 100px;
+            width: 110px;
+            font-size: 50px;
+            text-align: center;
+            color: black;
+            background-color: white
+        }
+    </style>
+</head>
+
+<body>
+    RELOJ
+    <!-- <span id="suceso"> </span> -->
+    <form name="form_reloj">
+        <input type="text" id='hora' /> :
+        <input type="text" id='minutos' /> :
+        <input type="text" id='segundos' />
+
+        <br>
+
+        <input type="text" name="dia" id="dia" /> /
+        <input type="text" name="mes" id="mes" /> /
+        <input type="text" name="ano" id="ano" />
+    </form>
+    <script>
+        let fechaDestino = new Date('2023-12-22T23:59:59');
+
+        function actualizarContador() {
+            let fechaActual = new Date();
+            document.getElementById("hora").value = fechaActual.getHours(); 
+            document.getElementById("minutos").value = fechaActual.getMinutes(); 
+            document.getElementById("segundos").value = fechaActual.getSeconds(); 
+            document.getElementById("dia").value = fechaActual.getDate(); 
+            document.getElementById("mes").value = fechaActual.getMonth(); 
+            document.getElementById("ano").value = fechaActual.getFullYear(); 
+
+
+            // let tiempoRestante = fechaDestino - fechaActual;
+
+            // if (tiempoRestante > 0) {
+            //     let dias = Math.floor(tiempoRestante / (1000 * 60 * 60 * 24));
+            //     let horas = Math.floor((tiempoRestante % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            //     let minutos = Math.floor((tiempoRestante % (1000 * 60 * 60)) / (1000 * 60));
+            //     let segundos = Math.floor((tiempoRestante % (1000 * 60)) / 1000);
+            //     document.getElementById("hora").value = horas;
+            //     document.getElementById("minutos").value = minutos;
+            //     document.getElementById("segundos").value = segundos;
+            //     document.getElementById("dia").value = fechaActual.getDay();
+            //     document.getElementById("mes").value = fechaActual.getMonth();
+            //     document.getElementById("ano").value = fechaActual.getFullYear();
+
+            // } else {
+            //     document.getElementById("suceso").innerHTML = "TERMINÓ";
+            // }
+        }
+
+        setInterval(actualizarContador, 1000);
+
+
+    </script>
+</body>
+
+</html>

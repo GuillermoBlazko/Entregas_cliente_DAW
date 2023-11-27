@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repeticiones de palabras</title>
+</head>
+
+<body>
+    <form action="" name="f0">
+        <h3>INTRODUZCA UN MÍNIMO DE 12 PALABRAS A TRAVÉS DE LA SIGUIENTE CAJA</h3><BR><BR>
+        <label for="">PALABRAS</label><input type="text" name="palabras"><br><br>
+        <input type="button" value="AÑADIR" onclick="procesar(this.value)">
+        <p> </p><input type="button" value="ESTADÍSTICA" onclick="procesar(this.value)"><br><br>
+        <h3>VISUALIZACIÓN DE LA ESTADÍSTICA DE LAS PALABRAS</h3><BR><BR>
+        <textarea cols="30" rows="10" id="salida"></textarea>
+    </form>
+
+    <script>
+        const MINPALABRAS = 2;
+        let counter = 0;
+        let mapPalabras = new Map();
+        let salida = document.getElementsByTagName("textarea")[0];
+        let encontrada = false;
+        function procesar(valor) {
+            switch (valor) {
+                case "AÑADIR":
+                    añadir();
+                    break;
+                case "ESTADÍSTICA":
+                    estadistica();
+                    break;
+                default:
+                    return false;
+                    break;
+            }
+        }
+
+        function añadir() {
+            let palabra = document.getElementsByName("palabras")[0].value;
+            if (palabra.toUpperCase() != "FIN") {
+                if (comprobarpalabra(palabra)) {
+                    encontrada = false; 
+                    palabra = palabra.toUpperCase();
+                    let keys = mapPalabras.keys();
+                   
+                    if(mapPalabras.has(palabra)){
+                        let val = mapPalabras.get(palabra)
+                        val++; 
+                        mapPalabras.set(palabra, val)
+                    }else{
+                        mapPalabras.set(palabra, 1);
+                        counter++;
+                    }
+
+                }
+                limpiar();
+                console.log(mapPalabras);
+            }else{
+                // document.getElementsByName("palabras")[0].innerHTML;
+            }
+        }
+
+        
+
+        function estadistica() {
+            console.log("Ha entrado funcion")
+
+            // document.getElementsByName("palabras")[0].innerHTML.disabled = true;
+            let msg = "";
+            if (counter < MINPALABRAS) {
+                salida.value = "No se puede hacer una visualización con menos de 12 elementos";
+            } else {
+                console.log("Ha entrado else")
+                for ([clave, valor] of mapPalabras) {
+                    console.log("ha entrado en el bucle");
+                    msg += clave + "     " + valor + "\n";
+                }
+
+                salida.value = msg;
+            }
+
+        }
+
+        function comprobarpalabra(palabra) {
+            return (isNaN(palabra) && palabra != null && palabra != "" && palabra != " " && palabra.toUpperCase() != "FIN") ? true : false;
+        }
+        limpiar = () => {
+            document.getElementsByName("palabras")[0].value = "";
+        }
+    </script>
+</body>
+
+</html>
